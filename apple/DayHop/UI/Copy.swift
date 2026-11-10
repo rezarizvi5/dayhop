@@ -15,6 +15,7 @@ enum Copy {
     static let pinMismatch = "That PIN does not match."
     static let pinLength = "Use 4 digits."
     static let pinTrivial = "Pick a PIN that is not 0000 or 1234."
+    static let pinUnavailable = "That PIN could not be saved on this device."
     static let nicknameLength = "Use 1 to 20 characters."
     static let nicknameForbidden = "That nickname has characters we cannot keep."
     static let nicknameCharset = "Use letters, numbers, spaces, hyphen or apostrophe."

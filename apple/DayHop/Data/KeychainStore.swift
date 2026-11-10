@@ -11,13 +11,15 @@ enum Digest {
 enum KeychainStore {
     private static let service = "com.example.routinebuddies"
 
+    static var lastStatus: OSStatus = errSecSuccess
+
     static func set(_ value: String, account: String) {
         let base = query(account)
         SecItemDelete(base as CFDictionary)
         var add = base
         add[kSecValueData as String] = Data(value.utf8)
         add[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlockedThisDeviceOnly
-        SecItemAdd(add as CFDictionary, nil)
+        lastStatus = SecItemAdd(add as CFDictionary, nil)
     }
 
     static func get(_ account: String) -> String? {

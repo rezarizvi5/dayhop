@@ -22,9 +22,6 @@ struct KidRootView: View {
                 }
         }
         .id(store.snapshot.activeKidID)
-        .fullScreenCover(item: Binding(get: { store.gate }, set: { store.gate = $0 })) { purpose in
-            GateView(purpose: purpose)
-        }
     }
 }
 
@@ -445,14 +442,18 @@ struct GateView: View {
 
     private func succeed() {
         switch purpose {
-        case .exitKidMode: store.exitKidMode()
+        case .exitKidMode:
+            store.exitKidMode()
         case .openParent(let route):
             store.exitKidMode()
             store.pendingRoute = route
-        case .signOut: store.signOut()
-        case .changePIN: break
+        case .signOut:
+            store.signOut()
+        case .changePIN, .unlockParent:
+            break
         }
         store.gate = nil
+        dismiss()
     }
 
     private func biometrics() {

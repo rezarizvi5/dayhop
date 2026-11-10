@@ -40,6 +40,7 @@ enum GatePurpose: Equatable, Identifiable {
     case openParent(ParentRoute)
     case signOut
     case changePIN
+    case unlockParent
 
     var id: String {
         switch self {
@@ -47,6 +48,7 @@ enum GatePurpose: Equatable, Identifiable {
         case .openParent(let route): return "open-\(route.token)"
         case .signOut: return "sign-out"
         case .changePIN: return "change-pin"
+        case .unlockParent: return "unlock"
         }
     }
 }
@@ -319,6 +321,7 @@ final class HouseholdStore: ObservableObject {
     func setPIN(_ pin: String) -> PinIssue? {
         if let issue = ParentPin.issue(pin) { return issue }
         KeychainStore.set(pinHash(pin), account: "pin")
+        guard hasPIN else { return .unavailable }
         snapshot.pinFailures = 0
         snapshot.pinLockedUntil = nil
         snapshot.onboardStep = max(snapshot.onboardStep, 8)
@@ -347,6 +350,7 @@ final class HouseholdStore: ObservableObject {
         guard passwordMatches(password) else { return .password }
         if let issue = ParentPin.issue(newPIN) { return .pin(issue) }
         KeychainStore.set(pinHash(newPIN), account: "pin")
+        guard hasPIN else { return .pin(.unavailable) }
         snapshot.pinFailures = 0
         snapshot.pinLockedUntil = nil
         snapshot.onboardStep = max(snapshot.onboardStep, 8)
@@ -410,6 +414,7 @@ final class HouseholdStore: ObservableObject {
         KeychainStore.set(pinHash("2580"), account: "pin")
         refreshDerived()
         commit()
+        if hasPIN { gate = .unlockParent }
     }
 
     func passwordMatches(_ password: String) -> Bool {

@@ -3,6 +3,7 @@ import Foundation
 enum PinIssue: Equatable {
     case length
     case trivial
+    case unavailable
 }
 
 struct LockoutState: Equatable {

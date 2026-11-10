@@ -11,18 +11,18 @@ Open the Xcode project. That is the app.
 3. Choose an iPhone or iPad simulator.
 4. Press Run.
 
-On the welcome screen, choose **Preview Maya's morning**. The parent PIN is **2580**. The preview password, used if a grown-up forgets the PIN, is `preview-house`.
+On the welcome screen, choose **Preview Maya's morning**. Enter the parent PIN **2580** once. That leaves the PIN screen and opens the parent view. The preview password, used if a grown-up forgets the PIN, is `preview-house`.
 
-Signing is turned off so the simulator runs without an Apple Developer team. A device build needs a team, and the bundle id `com.example.routinebuddies` still has to be registered.
+Simulator builds are signed ad hoc so the parent PIN can be stored in the Keychain. A device build needs a team, and the bundle id `com.example.routinebuddies` still has to be registered.
 
 ```bash
-xcodebuild -project apple/DayHop.xcodeproj -scheme DayHop -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Debug build CODE_SIGNING_ALLOWED=NO
+xcodebuild -project apple/DayHop.xcodeproj -scheme DayHop -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Debug build
 ```
 
 Unit tests for the routine-day, streak, star, and PIN rules:
 
 ```bash
-xcodebuild -project apple/DayHop.xcodeproj -scheme DayHop -destination 'platform=iOS Simulator,name=iPhone 17' test CODE_SIGNING_ALLOWED=NO
+xcodebuild -project apple/DayHop.xcodeproj -scheme DayHop -destination 'platform=iOS Simulator,name=iPhone 17' test
 ```
 
 The household is stored on the device. Decisions that differ from the spec are in [docs/decisions.md](docs/decisions.md). Work that needs a person is in [docs/human-tasks.md](docs/human-tasks.md).

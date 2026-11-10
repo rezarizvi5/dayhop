@@ -26,7 +26,6 @@ struct ParentRootView: View {
         }
         .sheet(isPresented: paywallBinding) { NavigationStack { PaywallView() } }
         .sheet(isPresented: reminderBinding) { reminderSheet }
-        .fullScreenCover(item: gateBinding) { purpose in GateView(purpose: purpose) }
         .onAppear(perform: consume)
         .onChange(of: store.pendingRoute, perform: { _ in consume() })
     }
@@ -37,10 +36,6 @@ struct ParentRootView: View {
 
     private var reminderBinding: Binding<Bool> {
         Binding(get: { store.askForReminders }, set: { store.askForReminders = $0 })
-    }
-
-    private var gateBinding: Binding<GatePurpose?> {
-        Binding(get: { store.gate }, set: { store.gate = $0 })
     }
 
     private var reminderSheet: some View {

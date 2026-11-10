@@ -39,6 +39,9 @@ struct RootView: View {
         .onChange(of: scenePhase, perform: { phase in
             if phase == .active { store.becameActive() }
         })
+        .fullScreenCover(item: Binding(get: { store.gate }, set: { store.gate = $0 })) { purpose in
+            GateView(purpose: purpose)
+        }
     }
 }
 

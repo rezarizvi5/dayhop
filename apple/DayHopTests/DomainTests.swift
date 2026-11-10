@@ -110,6 +110,12 @@ final class DomainTests: XCTestCase {
         XCTAssertEqual(Limits.cosmeticStage(lifetimeStars: 20, plusActive: true), 0)
     }
 
+    func testKeychainRoundTrip() {
+        KeychainStore.set("probe", account: "pin-probe")
+        XCTAssertEqual(KeychainStore.get("pin-probe"), "probe", "SecItemAdd status \(KeychainStore.lastStatus)")
+        KeychainStore.delete("pin-probe")
+    }
+
     func testNicknameAndPIN() {
         XCTAssertNil(Nicknames.issue("  Maya  "))
         XCTAssertEqual(Nicknames.normalize("  Maya   Jo "), "Maya Jo")

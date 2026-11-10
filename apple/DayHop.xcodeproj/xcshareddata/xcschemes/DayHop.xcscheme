@@ -38,6 +38,16 @@
                ReferencedContainer = "container:DayHop.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A10000000000000000000027"
+               BuildableName = "DayHopUITests.xctest"
+               BlueprintName = "DayHopUITests"
+               ReferencedContainer = "container:DayHop.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
