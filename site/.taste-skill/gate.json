@@ -1,0 +1,329 @@
+{
+ "start": "2026-11-10T03:42:57.981Z",
+ "round": 2,
+ "idle": 0,
+ "errors": 0,
+ "status": "pass",
+ "history": [
+  {
+   "at": "2026-11-10T04:51:45.757Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 4,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-10T04:54:09.419Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 3,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-10T04:56:30.041Z",
+   "mode": "manual",
+   "status": "pass",
+   "fails": 0,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": "index.html",
+  "dir": "/workspace/site",
+  "kind": "software",
+  "start": "2026-11-10T03:42:57.981Z",
+  "by": "start.mjs",
+  "url": null,
+  "category": "routine app for parents of children aged 4 to 10",
+  "primary": "Start a free trial"
+ },
+ "manual": true,
+ "roundKey": "aa19487477c29cd9:97d170e1",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "085f02e1b58e261a",
+ "page": "index.html",
+ "found": {
+  "fails": [],
+  "warns": [
+   {
+    "check": "cut-text",
+    "where": "div.grid > a.card.span-4:nth-of-type(1) > p.price > span.t-stat \"$0\"",
+    "msg": "sits across the edge of a panel behind it (and 1 more like it: \"$4.99\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "p.t-stat.mo-cr > span.mo-cr__col > span.mo-cr__strip > span:nth-of-type(2) \"8\"",
+    "msg": "cut 41px at the bottom by the overflow of div.stats > div.stat:nth-of-type(1) > p.t-stat.mo-cr > span.mo-cr__col (inside a held section or scroll scene, whose motion --quick does not check) (and 3 more like it: \"4\", \"3\", \"5\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "section#figures > div.wrap > div.stats \"7 8 9 0 1 2 3 4 5 6 7 day trial before P\"",
+    "msg": "starts an animation (1.4 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-cr__strip (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "busy-ground",
+    "where": "section#steps > div.wrap > div.section-head > p \"Templates ship with the app. Editing a c\"",
+    "msg": "text over a detailed part of a picture (its ground changes by 1.5 L* from one pixel to the next under the words) (and 2 more like it: \"Pack school bag\", \"Shoes on\")",
+    "fix": "move the text to a calm part of the picture, or put it on a panel",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#steps / section#approval",
+    "msg": "276px between these sections, +46% against the median 189px of gaps at a change of ground",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#routines / section#steps",
+    "msg": "uneven space at the edge of a band: 72px outside its edge, 156px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "header.nav > div.wrap.nav__bar > a.nav__logo \"DayHop\"",
+    "msg": "\"DayHop\" opens a section headed \"Routine app for kids aged 4 to 10\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(1) > a.nav__link \"Product\"",
+    "msg": "\"Product\" opens a section headed \"Today's routines in one window\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(1) > a:nth-of-type(1) \"Kid ModeA child taps each step\"",
+    "msg": "\"Kid ModeA child taps each step\" opens a section headed \"Today's routines in one window\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(1) > a:nth-of-type(3) \"Parent gateA PIN to leave Kid Mode\"",
+    "msg": "\"Parent gateA PIN to leave Kid Mode\" opens a section headed \"Set up in 3 steps\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(2) > a:nth-of-type(2) \"RewardsParents set the star price\"",
+    "msg": "\"RewardsParents set the star price\" opens a section headed \"Pricing\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(2) > a:nth-of-type(3) \"GuardiansTwo free, four on Plus\"",
+    "msg": "\"GuardiansTwo free, four on Plus\" opens a section headed \"Pricing\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__item:nth-of-type(1) > div.nav__menu > div.wrap.grid > a.menu-card.span-3 \"Morning4 of 6 Brush teeth Get dressed Ea\"",
+    "msg": "\"Morning4 of 6 Brush teeth Get dressed Ea\" opens a section headed \"Today's routines in one window\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(2) > a.nav__link \"Routines\"",
+    "msg": "\"Routines\" opens a section headed \"Set up in 3 steps\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-length",
+    "where": "section#questions \"Questions\"",
+    "msg": "1 section over 90 words a screen outside the UI mocks (\"Questions\" 127); 62 words a screen across the page (435 words in 7 screens): a tech page says it in about 80 or fewer",
+    "fix": "cut every section to its heading, one line and the product UI: the UI says the rest; no second paragraph, no list of feature sentences",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-current",
+    "where": "header.nav",
+    "msg": "the nav stays on screen with 4 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
+    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary:nth-of-type(2) \"start a free trial\"",
+    "msg": "\"start a free trial\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-air",
+    "where": "section#approval / section#prices",
+    "msg": "576px of air between the content of these two sections: 128-480px (64-600px WARN) (SR-3)",
+    "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "row-lines",
+    "where": "section#figures > div.wrap > div.stats \"78901234567day trial before Plus bills 3\"",
+    "msg": "a row of 4 items: its last item ends at 1188px, the container's right line at 1360px (2px either way) (it is in a scroll scene: told as a WARN) (SR-7)",
+    "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav",
+    "where": "header.nav > div.wrap.nav__bar > button.nav__toggle",
+    "msg": "the nav is lopsided: its last item ends 13px inside the content's edge (366px), while its first starts on the other edge",
+    "fix": "start the nav's first item and end its last on the content's two edges",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "div.ui.ui-panel > ul.ui-checks__list > li.ui-check:nth-of-type(9) > span.ui-check__label \"Bonus, 3 stars\"",
+    "msg": "cut 8px at the bottom by the overflow of section#routines > div.wrap > div.ui.app > div.app__pane.app__pane--open: a fragment run out through its panel's edge",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cta",
+    "where": "section#steps \"Set up in 3 steps\"",
+    "msg": "a section over 1.5 screens long with no link or button in it",
+    "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "busy-ground",
+    "where": "h2#steps-h \"Set up in 3 steps\"",
+    "msg": "text over a detailed part of a picture (its ground changes by 1.5 L* from one pixel to the next under the words) (and 1 more like it: \"Templates ship with the \")",
+    "fix": "move the text to a calm part of the picture, or put it on a panel",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "main#top > section.hero.hero--collage / section#routines",
+    "msg": "117px between these sections, -43% against the median 206px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-stat-strip",
+    "msg": "stat strip x1",
+    "fix": "a strip only of figures the brief gives (a price, hours, a count); otherwise put each number in the sentence it proves, or leave it out (references/copy-tells.md)",
+    "widths": [],
+    "from": "copy",
+    "where": "copy x1: \"7 / 3 / 2 / 4\"",
+    "exact": false
+   },
+   {
+    "check": "copy-cast",
+    "msg": "default-cast names: Maya",
+    "fix": "person names come only from the brief; a mock's names fit its locale and are not the names every model picks (references/copy-tells.md)",
+    "widths": [],
+    "from": "copy",
+    "where": "copy x1: \"Maya\"",
+    "exact": false
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 113,
+   "layout": 3
+  }
+ },
+ "open": [],
+ "waived": [],
+ "warnCount": 26,
+ "at": "2026-11-10T04:56:30.041Z"
+}

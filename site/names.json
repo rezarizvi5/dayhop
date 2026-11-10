@@ -1,0 +1,20 @@
+{
+  "name": "DayHop",
+  "givenBy": "repository name and the build request; the spec's open default is Routine Buddies until a trademark check",
+  "searched": true,
+  "queries": [
+    {
+      "query": "DayHop kids routine app",
+      "results": [
+        "https://dayhop.quest/ — DayHop, a day planner for the Greater Toronto Area, not a kids routine app",
+        "https://www.hoproutine.app/en — HopRoutine, a kids routine app (different name)",
+        "https://dayhop.ie/ — DayHop, family activity listings in Ireland, not a routine app",
+        "https://www.daydoo.app/ — DayDoo, a family planner (different name)"
+      ]
+    },
+    {
+      "query": "DayHop app",
+      "note": "The exact name is in use for adjacent products (city day plans, family activities). Trademark search remains a human task. The product keeps DayHop because the repository and the request use it."
+    }
+  ]
+}
