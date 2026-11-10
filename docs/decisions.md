@@ -8,7 +8,7 @@ The spec default is Routine Buddies. The repository and the request use DayHop, 
 
 ## Landing page and Expo web
 
-The spec says a web app is out of scope as a product, and it also requires a marketing URL. `site/` is that page. The product itself is the Expo app. Expo web is how this environment runs the same screens. It is not a shipped web product.
+The spec says a web app is out of scope as a product, and it also requires a marketing URL. `site/` is that page. An earlier pass ran the same screens in the browser so they could be previewed here. That preview is not the app.
 
 ## Local data instead of a live Supabase project
 
@@ -16,7 +16,7 @@ There is no Supabase project, anon key or service role in this environment. The 
 
 ## Parent PIN
 
-The spec stores a salted PIN hash in the iOS Keychain. The browser build stores a hash in the same local record so the gate, the lockout and the trivial-PIN rule can be tested. Move it to expo-secure-store on the iOS dev build. Sample household PIN is 2580.
+The spec stores a salted PIN hash in the iOS Keychain. The browser preview stores a hash in the same local record. The Xcode app stores a SHA-256 hash in the Keychain. Sample household PIN is 2580.
 
 ## Preview household
 
@@ -33,6 +33,20 @@ Plus is a local plan flag. The paywall shows $4.99 a month, $34.99 a year, the 7
 ## Characters
 
 Pip, Bo and Juniper render as a letter on their colour. `assets/manifest.json` is the swap point for the five Lottie states and PNG fallbacks.
+
+## Native iOS client
+
+The spec assumed Expo and React Native. The product people open is the Xcode app in `apple/DayHop.xcodeproj`, SwiftUI, iOS 16 and later, iPhone and iPad. The earlier Expo screens stay in the repo only so the existing checks keep running. They are not the app.
+
+The parent PIN is a salted SHA-256 hash in the iOS Keychain (`kSecAttrAccessibleWhenUnlockedThisDeviceOnly`). A missing install marker clears that Keychain item so reinstalling the app cannot skip the gate. The preview PIN is 2580 and the preview password is `preview-house`.
+
+Sign in with Apple and Google stay on the sign-in screen at the same size as email. Tapping them explains that the developer accounts are not connected. Email creates the household on this device. Two households are never merged.
+
+Plus is a local 7-day flag. The paywall shows $4.99 a month, $34.99 a year, the trial, when billing would start, and that this build does not charge. RevenueCat and StoreKit products are still a human task.
+
+Characters are drawn in SwiftUI. `apple/DayHop/Resources/manifest.json` is the swap point for final art. Step icons are a searchable SF Symbol set of about 150, not the final SVG pack. Streak milestone bonuses are 5 stars, once per milestone per child. A reward's weekly limit is counted per child. Past streak days use the current weekday mask from the day the routine was created; a full schedule history is not stored until the server exists.
+
+Reminders are local notifications only, opt-in, at most 60 over the next 7 days, skipped during quiet hours, and they use the household clock. Push, Supabase, and realtime sync are not in this build. Kid Mode never shows a sync error.
 
 ## Routine day
 

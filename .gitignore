@@ -36,9 +36,12 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# generated native folders
+# generated native folders from Expo. The hand-written Xcode project lives in apple/.
 /ios
 /android
+xcuserdata/
+*.xcuserstate
+DerivedData/
 
 # taste-skill browser profiles, check crops, and full-page screenshots
 site/.taste-skill/chrome-*/

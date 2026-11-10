@@ -1,0 +1,8 @@
+{
+  "characters": [
+    { "id": "pip", "name": "Pip", "states": ["idle", "cheer", "celebrate", "encourage", "sleepy"], "art": "drawn-placeholder" },
+    { "id": "bo", "name": "Bo", "states": ["idle", "cheer", "celebrate", "encourage", "sleepy"], "art": "drawn-placeholder" },
+    { "id": "juniper", "name": "Juniper", "states": ["idle", "cheer", "celebrate", "encourage", "sleepy"], "art": "drawn-placeholder" }
+  ],
+  "note": "Final Lottie and PNG files replace the drawn placeholders. Keep the character ids."
+}
