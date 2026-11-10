@@ -10,9 +10,9 @@ The spec default is Routine Buddies. The repository and the request use DayHop, 
 
 The spec says a web app is out of scope as a product, and it also requires a marketing URL. `site/` is that page. An earlier pass ran the same screens in the browser so they could be previewed here. That preview is not the app.
 
-## Local data instead of a live Supabase project
+## Local data until a Supabase project exists
 
-There is no Supabase project, anon key or service role in this environment. The app stores the household in Zustand (`dayhop` in localStorage) and applies the same domain rules the SQL RPCs are meant to apply. `supabase/migrations` is the schema and the kid-action RPCs, ready to apply when the project exists. The service-role key is not in the client.
+There is no Supabase project, anon key, or service role in this environment. `apple/DayHop/Resources/supabase.json` ships empty. While it is empty, the household stays on the phone and the same domain rules run locally. When a URL and anon key are present, the app talks to Supabase Auth, PostgREST, and Realtime directly. A household is small, so a sync pulls the whole household, including deletes, instead of a per-table cursor. The server wins after a push succeeds. The service-role key is not in the client.
 
 ## Parent PIN
 
@@ -24,7 +24,7 @@ Welcome includes “Preview Maya's morning”. It loads one kid, one routine, a 
 
 ## Sign-in
 
-Email and a password of at least 10 characters create the local household. Apple and Google buttons stay on the screen at equal weight and explain that the native token exchange is not available in the browser. Unverified Google email, nonce, and signing the Google SDK out are specified in the migration notes and blocked on the human Google Cloud and Apple setup.
+Email and a password of at least 10 characters create the local household when Supabase is not configured. Apple and Google stay on the sign-in screen at the same size. With an empty config they explain that those accounts are not connected. With a config they exchange an Apple or Google ID token, and a fresh nonce, for a Supabase session. Google uses an ephemeral browser session, openid and email only, and rejects an unverified email. Two households are never merged. At least one identity stays linked.
 
 ## Subscriptions
 
@@ -40,13 +40,13 @@ The spec assumed Expo and React Native. The product people open is the Xcode app
 
 The parent PIN is a salted SHA-256 hash in the iOS Keychain (`kSecAttrAccessibleWhenUnlockedThisDeviceOnly`). A missing install marker clears that Keychain item so reinstalling the app cannot skip the gate. The preview PIN is 2580 and the preview password is `preview-house`. Simulator builds are ad hoc signed. An unsigned simulator binary gets `errSecMissingEntitlement` (-34018) from the Keychain, so the sample PIN never saved, onboarding stayed on the PIN step, and that step asked for the digits twice and then could not leave. Preview now asks for 2580 once, on a single gate owned by the root view, and then opens the parent view.
 
-Sign in with Apple and Google stay on the sign-in screen at the same size as email. Tapping them explains that the developer accounts are not connected. Email creates the household on this device. Two households are never merged.
+Sign in with Apple and Google stay on the sign-in screen at the same size as email. With an empty `supabase.json` they explain that the developer accounts are not connected, and email creates the household on this device. With a project URL and anon key they sign in through Supabase. Two households are never merged. A cloud sign-out clears the household on this phone. The parent PIN stays on the device, so a new phone asks for it again.
 
 Plus is a local 7-day flag. The paywall shows $4.99 a month, $34.99 a year, the trial, when billing would start, and that this build does not charge. RevenueCat and StoreKit products are still a human task.
 
 Characters are drawn in SwiftUI. `apple/DayHop/Resources/manifest.json` is the swap point for final art. Step icons are a searchable SF Symbol set of about 150, not the final SVG pack. Streak milestone bonuses are 5 stars, once per milestone per child. A reward's weekly limit is counted per child. Past streak days use the current weekday mask from the day the routine was created; a full schedule history is not stored until the server exists.
 
-Reminders are local notifications only, opt-in, at most 60 over the next 7 days, skipped during quiet hours, and they use the household clock. Push, Supabase, and realtime sync are not in this build. Kid Mode never shows a sync error.
+Reminders are local notifications only, opt-in, at most 60 over the next 7 days, skipped during quiet hours, and they use the household clock. Household sync runs when `supabase.json` has a project URL and anon key: on launch, when the app becomes active, on a realtime change, and every five minutes. Kid Mode never shows a sync error. The parent home shows how many items could not sync, with a retry. Push and RevenueCat are still not in this build.
 
 ## Routine day
 

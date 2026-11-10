@@ -139,6 +139,10 @@ final class HouseholdStore: ObservableObject {
     @Published var askForReminders = false
     @Published var gate: GatePurpose?
     @Published var pendingRoute: ParentRoute?
+    @Published var syncFailedCount = 0
+    @Published var linkedProviderNames: [String] = []
+    @Published var authNotice: String?
+    var suppressSync = false
 
     private let fileURL: URL
     private var didLaunch = false
@@ -188,11 +192,13 @@ final class HouseholdStore: ObservableObject {
             defaults.set(true, forKey: installKey)
         }
         housekeeping()
+        CloudCenter.shared.attach(self)
         Task { await considerReminderPrompt() }
     }
 
     func becameActive() {
         housekeeping()
+        CloudCenter.shared.foreground()
         Task { await considerReminderPrompt() }
     }
 
@@ -359,6 +365,19 @@ final class HouseholdStore: ObservableObject {
     }
 
     func signOut() {
+        let cloud = CloudConfig.load().isConfigured && KeychainStore.get("cloud-session") != nil
+        if cloud {
+            Task { await CloudCenter.shared.signOut() }
+            KeychainStore.deleteAll()
+            suppressSync = true
+            snapshot = HouseholdSnapshot()
+            gate = nil
+            syncFailedCount = 0
+            linkedProviderNames = []
+            commit()
+            suppressSync = false
+            return
+        }
         KeychainStore.delete("pin")
         snapshot.signedIn = false
         snapshot.kidMode = false
@@ -371,11 +390,63 @@ final class HouseholdStore: ObservableObject {
 
     func deleteAccount(password: String) -> Bool {
         guard passwordMatches(password) else { return false }
+        Task { await CloudCenter.shared.signOut() }
         KeychainStore.deleteAll()
+        suppressSync = true
         snapshot = HouseholdSnapshot()
         gate = nil
+        syncFailedCount = 0
+        linkedProviderNames = []
         commit()
+        suppressSync = false
         return true
+    }
+
+    func noteCloudSignIn(email: String) -> SignInIssue? {
+        let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        if !snapshot.email.isEmpty, snapshot.email != trimmed, !snapshot.kids.isEmpty {
+            return .differentHousehold
+        }
+        snapshot.email = trimmed
+        snapshot.signedIn = true
+        snapshot.adultConfirmed = snapshot.adultConfirmed || snapshot.consentAt != nil
+        if snapshot.adultConfirmed, snapshot.consentAt != nil {
+            snapshot.onboardStep = hasPIN ? 8 : 7
+        } else if snapshot.onboardStep < 2 {
+            snapshot.onboardStep = 2
+        }
+        commit()
+        return nil
+    }
+
+    func applyCloud(_ incoming: HouseholdSnapshot, remoteID: UUID, email: String) {
+        suppressSync = true
+        var next = incoming
+        next.kidMode = snapshot.kidMode
+        next.activeKidID = snapshot.activeKidID
+        next.pinFailures = snapshot.pinFailures
+        next.pinLockedUntil = snapshot.pinLockedUntil
+        next.soundOn = snapshot.soundOn
+        next.readAloud = snapshot.readAloud
+        next.faceIDOn = snapshot.faceIDOn
+        next.quietStartMinute = snapshot.quietStartMinute
+        next.quietEndMinute = snapshot.quietEndMinute
+        next.notifyApprovals = snapshot.notifyApprovals
+        next.notifyFinished = snapshot.notifyFinished
+        next.notifyRewards = snapshot.notifyRewards
+        next.notifySummary = snapshot.notifySummary
+        next.notifyInvites = snapshot.notifyInvites
+        next.notifyBilling = snapshot.notifyBilling
+        next.email = email.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        next.signedIn = true
+        next.adultConfirmed = true
+        if next.consentAt == nil { next.consentAt = Date() }
+        next.onboardStep = hasPIN ? 8 : 7
+        next.createdFirstRoutine = !next.routines.isEmpty
+        snapshot = next
+        commit()
+        suppressSync = false
+        _ = remoteID
     }
 
     func loadSample() {
@@ -623,6 +694,9 @@ final class HouseholdStore: ObservableObject {
         persist(copy)
         let count = snapshot.kidMode ? 0 : pendingRuns.count + pendingRewards.count
         UNUserNotificationCenter.current().setBadgeCount(count, withCompletionHandler: nil)
+        if !suppressSync {
+            CloudCenter.shared.householdDidChange()
+        }
     }
 
     func activeRoutineCount(_ kidID: UUID) -> Int {

@@ -3,11 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
 		A10000000000000000000011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000000000000000000008;
+			remoteInfo = DayHop;
+		};
+		A10000000000000000000025 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A10000000000000000000001 /* Project object */;
 			proxyType = 1;
@@ -23,22 +30,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A10000000000000000000004 /* DayHop */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DayHop;
-			sourceTree = "<group>";
-		};
-		A10000000000000000000005 /* DayHopTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DayHopTests;
-			sourceTree = "<group>";
-		};
-		A10000000000000000000021 /* DayHopUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DayHopUITests;
-			sourceTree = "<group>";
-		};
+		A10000000000000000000004 /* DayHop */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A10000000000000000000030 /* Exceptions for "DayHop" folder in "DayHop" target */, ); explicitFileTypes = {}; explicitFolders = (); path = DayHop; sourceTree = "<group>"; };
+		A10000000000000000000005 /* DayHopTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DayHopTests; sourceTree = "<group>"; };
+		A10000000000000000000021 /* DayHopUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DayHopUITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A10000000000000000000030 /* Exceptions for "DayHop" folder in "DayHop" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A10000000000000000000008 /* DayHop */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A1000000000000000000000B /* Frameworks */ = {
@@ -183,7 +188,6 @@
 			);
 			mainGroup = A10000000000000000000002;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = A10000000000000000000003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -249,13 +253,6 @@
 			target = A10000000000000000000008 /* DayHop */;
 			targetProxy = A10000000000000000000011 /* PBXContainerItemProxy */;
 		};
-		A10000000000000000000025 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A10000000000000000000001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A10000000000000000000008;
-			remoteInfo = DayHop;
-		};
 		A10000000000000000000026 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A10000000000000000000008 /* DayHop */;
@@ -309,13 +306,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGNING_ALLOWED = NO;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "-";
 				"CODE_SIGN_STYLE[sdk=iphonesimulator*]" = Manual;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				GOOGLE_REVERSED_CLIENT_ID = dayhop;
+				INFOPLIST_FILE = DayHop/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DayHop;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "DayHop uses Face ID so a parent can leave Kid Mode without typing the PIN.";
@@ -344,13 +343,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGNING_ALLOWED = NO;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "-";
 				"CODE_SIGN_STYLE[sdk=iphonesimulator*]" = Manual;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				GOOGLE_REVERSED_CLIENT_ID = dayhop;
+				INFOPLIST_FILE = DayHop/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DayHop;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "DayHop uses Face ID so a parent can leave Kid Mode without typing the PIN.";
@@ -378,10 +379,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGNING_ALLOWED = NO;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "-";
 				"CODE_SIGN_STYLE[sdk=iphonesimulator*]" = Manual;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -400,10 +401,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGNING_ALLOWED = NO;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "-";
 				"CODE_SIGN_STYLE[sdk=iphonesimulator*]" = Manual;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -421,10 +422,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = NO;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "-";
 				"CODE_SIGN_STYLE[sdk=iphonesimulator*]" = Manual;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -442,10 +443,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = NO;
+				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "-";
 				"CODE_SIGN_STYLE[sdk=iphonesimulator*]" = Manual;
-				"CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]" = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

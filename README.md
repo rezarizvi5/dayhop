@@ -25,7 +25,7 @@ Unit tests for the routine-day, streak, star, and PIN rules:
 xcodebuild -project apple/DayHop.xcodeproj -scheme DayHop -destination 'platform=iOS Simulator,name=iPhone 17' test
 ```
 
-The household is stored on the device. Decisions that differ from the spec are in [docs/decisions.md](docs/decisions.md). Work that needs a person is in [docs/human-tasks.md](docs/human-tasks.md).
+The household is stored on the device. Apple, Google, and Supabase sign-in are wired, and they stay quiet while `apple/DayHop/Resources/supabase.json` is empty. Filling that file is listed in [docs/human-tasks.md](docs/human-tasks.md). Do not put a service-role key or a client secret in the app. Decisions that differ from the spec are in [docs/decisions.md](docs/decisions.md).
 
 ## Not the app
 
