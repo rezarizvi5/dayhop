@@ -102,6 +102,7 @@ enum RedemptionStatus: String, Codable {
     case requested
     case fulfilled
     case denied
+    case cancelled
 }
 
 struct Redemption: Codable, Equatable, Identifiable {
@@ -217,6 +218,14 @@ enum SignInIssue: Equatable {
     case invalid
     case password
     case differentHousehold
+    case notConfigured
+    case offline
+    case cancelled
+    case unverified
+    case confirmationSent
+    case alreadyLinked
+    case useExisting
+    case generic
 }
 
 enum KidWrite: Equatable {

@@ -391,6 +391,12 @@ struct GateView: View {
             }
             Button(Copy.forgotPIN) { forgot = true }.frame(minHeight: 44)
             if forgot {
+                if store.linkedProviderNames.contains("apple") {
+                    Button(Copy.confirmWithApple) { Task { await reauthenticate("apple") } }.frame(minHeight: 44)
+                }
+                if store.linkedProviderNames.contains("google") {
+                    Button(Copy.confirmWithGoogle) { Task { await reauthenticate("google") } }.frame(minHeight: 44)
+                }
                 SecureField(Copy.passwordAgain, text: $password).padding(14).background(Theme.card, in: RoundedRectangle(cornerRadius: 14))
                 Button(Copy.confirmPIN) { reset() }.frame(minHeight: 44)
             }
@@ -433,6 +439,18 @@ struct GateView: View {
 
     private func reset() {
         guard store.passwordMatches(password) else { message = Copy.wrongPassword; return }
+        beginReplacement()
+    }
+
+    private func reauthenticate(_ provider: String) async {
+        if await CloudCenter.shared.reauthenticate(provider: provider) {
+            beginReplacement()
+        } else {
+            message = Copy.genericSignIn
+        }
+    }
+
+    private func beginReplacement() {
         replacing = true
         pin = ""
         fresh = ""

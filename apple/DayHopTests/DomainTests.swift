@@ -152,6 +152,53 @@ final class DomainTests: XCTestCase {
         XCTAssertEqual(Catalog.characters.count, 3)
     }
 
+    func testHouseholdJoinNeverMergesTwoHomes() {
+        let local = UUID()
+        let remote = UUID()
+        XCTAssertEqual(CloudRules.join(localRemoteID: nil, serverHouseholdID: nil, localHasContent: true), .uploadLocal)
+        XCTAssertEqual(CloudRules.join(localRemoteID: nil, serverHouseholdID: remote, localHasContent: false), .useRemote)
+        XCTAssertEqual(CloudRules.join(localRemoteID: nil, serverHouseholdID: remote, localHasContent: true), .refuseMerge)
+        XCTAssertEqual(CloudRules.join(localRemoteID: local, serverHouseholdID: nil, localHasContent: true), .uploadLocal)
+        XCTAssertEqual(CloudRules.join(localRemoteID: local, serverHouseholdID: local, localHasContent: false), .alreadySynced)
+        XCTAssertEqual(CloudRules.join(localRemoteID: local, serverHouseholdID: remote, localHasContent: false), .refuseMerge)
+    }
+
+    func testUnlinkKeepsOneIdentity() {
+        XCTAssertFalse(CloudRules.canUnlink(identityCount: 0))
+        XCTAssertFalse(CloudRules.canUnlink(identityCount: 1))
+        XCTAssertTrue(CloudRules.canUnlink(identityCount: 2))
+    }
+
+    func testRetryDelayCapsAtFiveMinutes() {
+        XCTAssertEqual(CloudRules.retryDelay(attempt: 1), 2, accuracy: 0.001)
+        XCTAssertEqual(CloudRules.retryDelay(attempt: 2), 4, accuracy: 0.001)
+        XCTAssertEqual(CloudRules.retryDelay(attempt: 20), 300, accuracy: 0.001)
+    }
+
+    func testGoogleEmailMustBeVerified() {
+        XCTAssertTrue(CloudRules.googleEmailVerified(jwt(["email_verified": true])))
+        XCTAssertTrue(CloudRules.googleEmailVerified(jwt(["email_verified": "true"])))
+        XCTAssertFalse(CloudRules.googleEmailVerified(jwt(["email_verified": false])))
+        XCTAssertFalse(CloudRules.googleEmailVerified("not-a-token"))
+    }
+
+    func testCodeChallengeIsBase64URLNotHex() {
+        let challenge = CloudRules.codeChallenge("dayhop-verifier")
+        XCTAssertFalse(challenge.contains("+"))
+        XCTAssertFalse(challenge.contains("/"))
+        XCTAssertFalse(challenge.contains("="))
+        XCTAssertNotEqual(challenge, CloudRules.sha256Hex("dayhop-verifier"))
+        XCTAssertFalse(CloudConfig(url: nil, anonKey: "", googleClientID: "", googleReversedClientID: "").isConfigured)
+        XCTAssertFalse(CloudConfig.load().isConfigured)
+    }
+
+    private func jwt(_ payload: [String: Any]) -> String {
+        let data = try! JSONSerialization.data(withJSONObject: payload)
+        var body = data.base64EncodedString()
+        body = body.replacingOccurrences(of: "+", with: "-").replacingOccurrences(of: "/", with: "_").replacingOccurrences(of: "=", with: "")
+        return "header.\(body).sig"
+    }
+
     private func date(_ value: String) -> Date {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]

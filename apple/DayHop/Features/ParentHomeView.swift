@@ -69,6 +69,16 @@ struct ParentHomeView: View {
                 Text("\(Copy.savedOnDevice) · \(store.todayString())")
                     .font(.subheadline)
                     .foregroundStyle(Theme.muted)
+                if store.syncFailedCount > 0 {
+                    Text(Copy.syncFailed(store.syncFailedCount)).foregroundStyle(Theme.ink)
+                    Button(Copy.syncRetry) { CloudCenter.shared.retry() }.frame(minHeight: 44)
+                } else if !CloudConfig.load().isConfigured {
+                    Text(Copy.syncLater).font(.subheadline).foregroundStyle(Theme.muted)
+                }
+                if let notice = store.authNotice {
+                    Text(notice).foregroundStyle(Theme.ink)
+                    Button(Copy.done) { store.authNotice = nil }.frame(minHeight: 44)
+                }
                 if store.deviceZoneDiffers {
                     DayHopCard {
                         Text(Copy.zoneBanner).foregroundStyle(Theme.ink)

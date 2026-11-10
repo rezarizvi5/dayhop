@@ -68,10 +68,13 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 14) {
             Text(Copy.signIn).font(.largeTitle.weight(.semibold)).foregroundStyle(Theme.ink)
             if !reachability.online {
-                Text(Copy.offline).font(.body).foregroundStyle(Theme.ink)
+                Text(CloudConfig.load().isConfigured ? Copy.offlineBlock : Copy.offline).font(.body).foregroundStyle(Theme.ink)
             }
-            providerButton(Copy.apple, filled: true) { message = Copy.providerApple }
-            providerButton(Copy.google, filled: false) { message = Copy.providerGoogle }
+            if let notice = store.authNotice {
+                Text(notice).font(.body).foregroundStyle(Theme.ink)
+            }
+            providerButton(Copy.apple, filled: true) { Task { await startProvider("apple") } }
+            providerButton(Copy.google, filled: false) { Task { await startProvider("google") } }
             TextField(Copy.emailHint, text: $email)
                 .textContentType(.username)
                 .keyboardType(.emailAddress)
@@ -238,11 +241,43 @@ struct OnboardingView: View {
     }
 
     private func submitEmail() {
-        switch store.signIn(email: email, password: password) {
-        case nil: message = nil
-        case .invalid: message = Copy.invalidSignIn
-        case .password: message = Copy.wrongPassword
-        case .differentHousehold: message = Copy.differentHousehold
+        let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard trimmed.contains("@"), trimmed.contains("."), password.count >= 10 else {
+            message = Copy.invalidSignIn
+            return
+        }
+        if CloudConfig.load().isConfigured {
+            if !reachability.online {
+                message = Copy.offlineBlock
+                return
+            }
+            Task { message = signInText(await CloudCenter.shared.signIn(email: trimmed, password: password)) }
+            return
+        }
+        message = signInText(store.signIn(email: trimmed, password: password))
+    }
+
+    private func startProvider(_ provider: String) async {
+        if CloudConfig.load().isConfigured && !reachability.online {
+            message = Copy.offlineBlock
+            return
+        }
+        message = signInText(await CloudCenter.shared.signIn(provider: provider), provider: provider)
+    }
+
+    private func signInText(_ issue: SignInIssue?, provider: String? = nil) -> String? {
+        switch issue {
+        case nil, .cancelled: return nil
+        case .invalid: return Copy.invalidSignIn
+        case .password: return Copy.wrongPassword
+        case .differentHousehold: return Copy.differentHousehold
+        case .notConfigured: return provider == "google" ? Copy.providerGoogle : Copy.providerApple
+        case .offline: return Copy.offlineBlock
+        case .unverified: return Copy.unverifiedGoogle
+        case .confirmationSent: return Copy.confirmationSent
+        case .alreadyLinked: return Copy.alreadyLinked
+        case .useExisting: return Copy.useExisting
+        case .generic: return Copy.genericSignIn
         }
     }
 

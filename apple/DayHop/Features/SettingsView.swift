@@ -156,21 +156,59 @@ struct InviteView: View {
 }
 
 struct MethodsView: View {
+    @EnvironmentObject private var store: HouseholdStore
     @State private var note: String?
 
     var body: some View {
         Form {
             Section {
                 Text(Copy.methodsBody)
-                Label(Copy.email, systemImage: "checkmark.circle.fill")
-                Button(Copy.linkApple) { note = Copy.linkUnavailable }.frame(minHeight: 44)
-                Button(Copy.linkGoogle) { note = Copy.linkUnavailable }.frame(minHeight: 44)
-                Button(Copy.unlink) { note = Copy.cannotUnlink }.frame(minHeight: 44)
+                if CloudConfig.load().isConfigured {
+                    ForEach(store.linkedProviderNames, id: \.self) { provider in
+                        Label(provider, systemImage: "checkmark.circle.fill")
+                    }
+                    Button(Copy.linkApple) { Task { await link("apple") } }.frame(minHeight: 44)
+                    Button(Copy.linkGoogle) { Task { await link("google") } }.frame(minHeight: 44)
+                    Button(Copy.unlink) { Task { await unlinkLast() } }.frame(minHeight: 44)
+                } else {
+                    Label(Copy.email, systemImage: "checkmark.circle.fill")
+                    Button(Copy.linkApple) { note = Copy.linkUnavailable }.frame(minHeight: 44)
+                    Button(Copy.linkGoogle) { note = Copy.linkUnavailable }.frame(minHeight: 44)
+                    Button(Copy.unlink) { note = Copy.cannotUnlink }.frame(minHeight: 44)
+                }
                 Text(Copy.googleRecovery).font(.footnote).foregroundStyle(Theme.muted)
+                if store.authNotice != nil { Text(store.authNotice ?? "") }
                 if let note { Text(note) }
             }
         }
         .navigationTitle(Copy.methods)
+    }
+
+    private func link(_ provider: String) async {
+        note = methodText(await CloudCenter.shared.link(provider: provider), provider: provider)
+        if note == nil { note = Copy.savedOnDevice }
+    }
+
+    private func unlinkLast() async {
+        guard CloudRules.canUnlink(identityCount: store.linkedProviderNames.count),
+              let provider = store.linkedProviderNames.last else {
+            note = Copy.cannotUnlink
+            return
+        }
+        note = methodText(await CloudCenter.shared.unlink(provider: provider), provider: provider)
+    }
+
+    private func methodText(_ issue: SignInIssue?, provider: String) -> String? {
+        switch issue {
+        case nil, .cancelled: return nil
+        case .notConfigured: return provider == "google" ? Copy.providerGoogle : Copy.providerApple
+        case .alreadyLinked: return Copy.alreadyLinked
+        case .useExisting: return Copy.useExisting
+        case .unverified: return Copy.unverifiedGoogle
+        case .offline: return Copy.offlineBlock
+        case .invalid: return Copy.cannotUnlink
+        default: return Copy.genericSignIn
+        }
     }
 }
 
