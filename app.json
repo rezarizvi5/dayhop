@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "DayHop",
+    "slug": "dayhop",
+    "version": "0.1.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "dayhop",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.routinebuddies",
+      "requireFullScreen": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#eef0f3",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.example.routinebuddies"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "extra": {
+      "privacyPolicyUrl": "https://dayhop.example/privacy",
+      "termsUrl": "https://dayhop.example/terms",
+      "supportEmail": "hello@dayhop.example"
+    }
+  }
+}

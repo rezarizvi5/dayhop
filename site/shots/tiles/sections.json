@@ -1,0 +1,298 @@
+{
+ "url": "http://127.0.0.1:5300/index.html",
+ "views": {
+  "desktop": {
+   "width": 1440,
+   "height": 900,
+   "navH": 72,
+   "scrollHeight": 7200,
+   "screens": 8,
+   "sections": [
+    {
+     "n": 1,
+     "tag": "section",
+     "id": "",
+     "cls": "hero hero--collage is-still is-entered",
+     "top": 0,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-01-a.jpg",
+       "scrollY": 0
+      }
+     ]
+    },
+    {
+     "n": 2,
+     "tag": "section",
+     "id": "routines",
+     "cls": "section",
+     "top": 900,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-02-a.jpg",
+       "scrollY": 900
+      }
+     ]
+    },
+    {
+     "n": 3,
+     "tag": "section",
+     "id": "steps",
+     "cls": "section bg-band",
+     "top": 1800,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-03-a.jpg",
+       "scrollY": 1800
+      }
+     ]
+    },
+    {
+     "n": 4,
+     "tag": "section",
+     "id": "approval",
+     "cls": "section",
+     "top": 2700,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-04-a.jpg",
+       "scrollY": 2700
+      }
+     ]
+    },
+    {
+     "n": 5,
+     "tag": "section",
+     "id": "prices",
+     "cls": "section",
+     "top": 3600,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-05-a.jpg",
+       "scrollY": 3600
+      }
+     ]
+    },
+    {
+     "n": 6,
+     "tag": "section",
+     "id": "figures",
+     "cls": "section bg-mist",
+     "top": 4500,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-06-a.jpg",
+       "scrollY": 4500
+      }
+     ]
+    },
+    {
+     "n": 7,
+     "tag": "section",
+     "id": "questions",
+     "cls": "section",
+     "top": 5400,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-07-a.jpg",
+       "scrollY": 5400
+      }
+     ]
+    },
+    {
+     "n": 8,
+     "tag": "footer",
+     "id": "contact",
+     "cls": "footer closing",
+     "top": 6300,
+     "h": 900,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "desktop-sec-08-a.jpg",
+       "scrollY": 6300
+      }
+     ]
+    }
+   ],
+   "consoleErrors": []
+  },
+  "mobile": {
+   "width": 390,
+   "height": 844,
+   "navH": 56,
+   "scrollHeight": 7494,
+   "screens": 8.88,
+   "sections": [
+    {
+     "n": 1,
+     "tag": "section",
+     "id": "",
+     "cls": "hero hero--collage is-still is-entered",
+     "top": 0,
+     "h": 844,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "mobile-sec-01-a.jpg",
+       "scrollY": 0
+      }
+     ]
+    },
+    {
+     "n": 2,
+     "tag": "section",
+     "id": "routines",
+     "cls": "section",
+     "top": 844,
+     "h": 844,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "mobile-sec-02-a.jpg",
+       "scrollY": 844
+      }
+     ]
+    },
+    {
+     "n": 3,
+     "tag": "section",
+     "id": "steps",
+     "cls": "section bg-band",
+     "top": 1688,
+     "h": 1115,
+     "hScreens": 1.32,
+     "offGrid": 271,
+     "tiles": [
+      {
+       "file": "mobile-sec-03-a.jpg",
+       "scrollY": 1688
+      },
+      {
+       "file": "mobile-sec-03-b.jpg",
+       "scrollY": 1959
+      }
+     ]
+    },
+    {
+     "n": 4,
+     "tag": "section",
+     "id": "approval",
+     "cls": "section",
+     "top": 2803,
+     "h": 844,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "mobile-sec-04-a.jpg",
+       "scrollY": 2803
+      }
+     ]
+    },
+    {
+     "n": 5,
+     "tag": "section",
+     "id": "prices",
+     "cls": "section",
+     "top": 3647,
+     "h": 1063,
+     "hScreens": 1.26,
+     "offGrid": 219,
+     "tiles": [
+      {
+       "file": "mobile-sec-05-a.jpg",
+       "scrollY": 3647
+      },
+      {
+       "file": "mobile-sec-05-b.jpg",
+       "scrollY": 3866
+      }
+     ]
+    },
+    {
+     "n": 6,
+     "tag": "section",
+     "id": "figures",
+     "cls": "section bg-mist",
+     "top": 4710,
+     "h": 844,
+     "hScreens": 1,
+     "offGrid": 0,
+     "tiles": [
+      {
+       "file": "mobile-sec-06-a.jpg",
+       "scrollY": 4710
+      }
+     ]
+    },
+    {
+     "n": 7,
+     "tag": "section",
+     "id": "questions",
+     "cls": "section",
+     "top": 5554,
+     "h": 915,
+     "hScreens": 1.08,
+     "offGrid": 71,
+     "tiles": [
+      {
+       "file": "mobile-sec-07-a.jpg",
+       "scrollY": 5554
+      },
+      {
+       "file": "mobile-sec-07-b.jpg",
+       "scrollY": 5625
+      }
+     ]
+    },
+    {
+     "n": 8,
+     "tag": "footer",
+     "id": "contact",
+     "cls": "footer closing",
+     "top": 6469,
+     "h": 1025,
+     "hScreens": 1.21,
+     "offGrid": 181,
+     "tiles": [
+      {
+       "file": "mobile-sec-08-a.jpg",
+       "scrollY": 6469
+      },
+      {
+       "file": "mobile-sec-08-b.jpg",
+       "scrollY": 6650
+      }
+     ]
+    }
+   ],
+   "consoleErrors": []
+  }
+ },
+ "at": "2026-11-10T04:48:32.426Z"
+}

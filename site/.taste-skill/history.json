@@ -1,0 +1,30 @@
+{
+ "palettes": [
+  "cool-grey-cobalt"
+ ],
+ "types": [
+  "geist"
+ ],
+ "dealt": [
+  "geist",
+  "host",
+  "gabarito"
+ ],
+ "moments": [
+  {
+   "id": "counter-rolls",
+   "at": "2026-11-10T03:42:58.031Z",
+   "seed": "29280486"
+  },
+  {
+   "id": "liquid-type",
+   "at": "2026-11-10T03:45:10.445Z",
+   "seed": "618ae6ca"
+  },
+  {
+   "id": "line-carries-colour",
+   "at": "2026-11-10T03:45:10.445Z",
+   "seed": "618ae6ca"
+  }
+ ]
+}

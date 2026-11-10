@@ -1,0 +1,8 @@
+{
+  "characters": [
+    { "id": "pip", "name": "Pip", "states": ["idle", "cheer", "celebrate", "encourage", "sleepy"], "art": "placeholder-letter" },
+    { "id": "bo", "name": "Bo", "states": ["idle", "cheer", "celebrate", "encourage", "sleepy"], "art": "placeholder-letter" },
+    { "id": "juniper", "name": "Juniper", "states": ["idle", "cheer", "celebrate", "encourage", "sleepy"], "art": "placeholder-letter" }
+  ],
+  "note": "Final Lottie and PNG files are a human task. Swap files here without changing screen code."
+}
