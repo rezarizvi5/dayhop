@@ -211,8 +211,11 @@ struct OnboardingView: View {
                     confirm = ""
                     confirming = false
                     pin = ""
-                } else {
-                    message = store.setPIN(entered).map(pinMessage)
+                } else if let issue = store.setPIN(entered) {
+                    message = pinMessage(issue)
+                    confirm = ""
+                    confirming = false
+                    pin = ""
                 }
             }
             if let message { Text(message).foregroundStyle(Theme.ink) }
@@ -322,6 +325,7 @@ func pinMessage(_ issue: PinIssue) -> String {
     switch issue {
     case .length: return Copy.pinLength
     case .trivial: return Copy.pinTrivial
+    case .unavailable: return Copy.pinUnavailable
     }
 }
 

@@ -38,7 +38,7 @@ Pip, Bo and Juniper render as a letter on their colour. `assets/manifest.json` i
 
 The spec assumed Expo and React Native. The product people open is the Xcode app in `apple/DayHop.xcodeproj`, SwiftUI, iOS 16 and later, iPhone and iPad. The earlier Expo screens stay in the repo only so the existing checks keep running. They are not the app.
 
-The parent PIN is a salted SHA-256 hash in the iOS Keychain (`kSecAttrAccessibleWhenUnlockedThisDeviceOnly`). A missing install marker clears that Keychain item so reinstalling the app cannot skip the gate. The preview PIN is 2580 and the preview password is `preview-house`.
+The parent PIN is a salted SHA-256 hash in the iOS Keychain (`kSecAttrAccessibleWhenUnlockedThisDeviceOnly`). A missing install marker clears that Keychain item so reinstalling the app cannot skip the gate. The preview PIN is 2580 and the preview password is `preview-house`. Simulator builds are ad hoc signed. An unsigned simulator binary gets `errSecMissingEntitlement` (-34018) from the Keychain, so the sample PIN never saved, onboarding stayed on the PIN step, and that step asked for the digits twice and then could not leave. Preview now asks for 2580 once, on a single gate owned by the root view, and then opens the parent view.
 
 Sign in with Apple and Google stay on the sign-in screen at the same size as email. Tapping them explains that the developer accounts are not connected. Email creates the household on this device. Two households are never merged.
 
