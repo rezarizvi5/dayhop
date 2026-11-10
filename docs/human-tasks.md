@@ -1,6 +1,6 @@
 # Human tasks
 
-The build does not block on these. Each one is stubbed.
+The build does not block on these. Each one is stubbed. The iOS app is the Xcode project in `apple/`. Apple, Google, Supabase, RevenueCat, and push are still not live.
 
 - Apple Developer Program, Paid Apps Agreement, bundle id, and Sign in with Apple.
 - Google Cloud iOS OAuth client. Scopes stay openid and email. The client must send a fresh nonce and sign the Google SDK out after Supabase accepts the session.
